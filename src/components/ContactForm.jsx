@@ -16,17 +16,17 @@ const ContactForm = () => {
     setNameError(false);
     setPhoneNumberError(false);
 
-    // if (!name.trim() || !phoneNumber.trim()) {
-    //   setSubmitError('이름과 전화번호를 모두 입력해주세요.');
-    //   return;
-    // }
+    if (!name.trim() || !phoneNumber.trim()) {
+      setSubmitError('이름과 전화번호를 모두 입력해주세요.');
+      return;
+    }
 
-    // const phoneRegex = /^010-\d{4}-\d{4}$/;
-    // if (!phoneRegex.test(phoneNumber)) {
-    //   setPhoneNumberError(true);
-    //   setPhoneNumberHelperText('전화번호 형식을 확인해주세요 (예: 010-xxxx-xxxx).');
-    //   return;
-    // }
+    const phoneRegex = /^010-\d{4}-\d{4}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      setPhoneNumberError(true);
+      setPhoneNumberHelperText('전화번호 형식을 확인해주세요 (예: 010-xxxx-xxxx).');
+      return;
+    }
 
     addContact(name, phoneNumber);
     setName('');
