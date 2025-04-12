@@ -11,6 +11,16 @@ const ContactForm = () => {
   const [submitError, setSubmitError] = useState('');
   const { addContact } = usePhoneBookStore();
 
+  const formatPhoneNumber = (number) => {
+    const cleaned = ('' + number).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{4})(\d{4})$/);
+    console.log('cleaned:', cleaned);
+    console.log('match:', match);
+    if (match) {
+        return `${match[1]}-${match[2]}-${match[3]}`;
+    }
+    return cleaned;
+};
   const handleAddContact = () => {
     setSubmitError('');
     setNameError(false);
@@ -21,14 +31,16 @@ const ContactForm = () => {
       return;
     }
 
-    const phoneRegex = /^010-\d{4}-\d{4}$/;
+    const phoneRegex = /^010\d{8}$/;
     if (!phoneRegex.test(phoneNumber)) {
       setPhoneNumberError(true);
-      setPhoneNumberHelperText('전화번호 형식을 확인해주세요 (예: 010-xxxx-xxxx).');
+      setPhoneNumberHelperText('전화번호 형식을 확인해주세요 (예: 010xxxxxxxx).');
       return;
     }
 
-    addContact(name, phoneNumber);
+
+
+    addContact(name, formatPhoneNumber(phoneNumber));
     setName('');
     setPhoneNumber('');
   };
