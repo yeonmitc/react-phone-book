@@ -3,13 +3,14 @@ import './App.css';
 import {
   CssBaseline,
   Box,
-  Typography,
+  Typography ,
   TextField,
   Button,
   Grid,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { styled } from '@mui/system';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import usePhoneBookStore from './stores/usePhoneBookStore';
@@ -57,13 +58,39 @@ function App() {
     }
   }, [handleApplySearch]);
 
+  const FancyTypography = styled(Typography)(({ theme }) => ({
+    margin: theme.spacing(3),
+    color: '#4a90e2', // 부드러운 블루 색상
+    fontWeight: 'bold',
+    fontFamily: "'Roboto', sans-serif",
+    display: 'inline-block',
+    padding: '8px 16px',
+    background: 'linear-gradient(45deg, #e6f0fa, #f0f8ff)', // 은은한 그라디언트 배경
+    borderRadius: '8px',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', // 부드러운 그림자
+    animation: 'slideIn 1s ease-out',
+  }));
+
+  const MovingEmoji = styled('span')({
+    display: 'inline-block',
+    animation: 'bounce 1.5s ease-in-out infinite',
+    '@keyframes bounce': {
+      '0%, 100%': {
+        transform: 'translateY(0)',
+      },
+      '50%': {
+        transform: 'translateY(-8px)', // 위아래로 움직이는 정도
+      },
+    },
+  });
+
   return (
     <div className="App">
       <CssBaseline />
       <Box display="flex" justifyContent="center" marginBottom={2}>
-        <Typography variant="h4" component="h1" margin={3}>
-          My Phone-BOOK
-        </Typography>
+      <FancyTypography variant="h4" component="h1">
+      <MovingEmoji>📱</MovingEmoji> 내 연락처 저장  <MovingEmoji>☎️✨</MovingEmoji>
+</FancyTypography>;
       </Box>
 
       <Box
